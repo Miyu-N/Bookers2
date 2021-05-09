@@ -7,14 +7,16 @@ class BooksController < ApplicationController
         @user = current_user
 		@book = Book.new(book_params)
         @book.user_id = (current_user.id)
-	  if @book.save
+	   if @book.save
         flash[:notice] = "You have creatad book successfully."
 		redirect_to  book_path(@book.id)
-    else
+        
+       else
+        
         @books = Book.all
         flash[:notice] = ' errors prohibited this obj from being saved:'
         render "index"
-    end
+       end
 	end
 
     def show
@@ -27,6 +29,7 @@ class BooksController < ApplicationController
         @user = current_user
         @books = Book.all
         @book = Book.new
+        
     end
 
     def edit
@@ -68,6 +71,5 @@ class BooksController < ApplicationController
     if @book.user_id != current_user.id
         redirect_to books_path
     end 
-  end
-
+    end
 end
