@@ -1,9 +1,12 @@
- <% if @book.errors %>
+ <% if @book.errors.any? %>
+　<div class="error">
+  <h3><%= @book.errors.count %>errors prohibited this obj from being saved:</h3><br>
    <ul>
     <% @book.errors.full_messages.each do |message| %>
       <li><%= message %></li>
        <% end %>
-        </ul>
+   </ul>
+  </div>      
       <% end %>
 
 <div class="container px-5 px-sm-0">
@@ -28,27 +31,23 @@
         </tbody>
       </table>
 
-      <%= link_to "", edit_user_path(@user.id), class:"btn btn-outline-secondary btn-block fas fa-users-cog" %>
+      <%= link_to "", edit_user_path(@user.id), class:"btn btn-outline-secondary btn-block fas fa-user-cog" %>
+      
       <%= form_with model: @book, url: books_path, local: true do |f| %>
-      
-      <h2 class="mt-3">New book</h2>
-      
-      <form>
+        <h2 class="mt-3">New book</h2>
         <div class="form-group">
           <%= f.label :Title %>
             <%= f.text_field :title, class:"form-control" %>
         </div>     
-          
         <div class="form-group">
             <%= f.label :Opinion %>
             <%= f.text_area :body, class:"form-control" %>
         </div>    
         <div class="form-group">
-        <%= f.submit 'Create Book', class:"btn btn-success" %>
+          <%= f.submit 'Create Book', class:"btn btn-success" %>
         </div>
-      </form> 
       <% end %>
-      
+
     </div>
 
     <div class="col-md-8 offset-md-1">
